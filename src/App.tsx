@@ -13,15 +13,17 @@ function App() {
   let [on, setOn] = useState<boolean>(false)
   return (
       <div className="App">
-        <Accordion titleValue={"Menu"}
+        <Accordion titleValue={"Users"}
                    collapsed={accordionCollapsed}
                    onChange={ () => {setAccordionCollapsed(!accordionCollapsed)} }
+                   onClick={() => console.log('some item was clicked')}
+                   items={[{title: "Micky", value: 1}, {title: "Helena", value: 2}, {title: "Rob", value: 3}]}
         />
         <UncontrolledAccordion
-            titleValue={"Users"}
+            titleValue={"Menu"}
         />
         <Rating value={ratingValue} onClick={setRatingValue} />
-        <UncontrolledRating />
+        <UncontrolledRating  onChange={() => console.log('rating changed')}/>
         <OnOff onChange={setOn} on={on}/>
         <UncontrolledOnOff onChange={setOn}/>
       </div>
