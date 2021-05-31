@@ -18,7 +18,7 @@ const Users = ( props: { users: Array<string> } ) => {
 const UsersContainer = React.memo(Users);
 
 export const Example1 = () => {
-    const [count, setCount] = useState<number>(0)
+    const [counter, setCount] = useState<number>(0)
     const [users, setUsers] = useState<Array<string>>(["Victor", "Valera", "Lena"])
     const addUser = () => {
         const newUsers = [...users, "Sveta" + new Date().getTime()]
@@ -26,9 +26,9 @@ export const Example1 = () => {
     }
 
     return <>
-        <button onClick={() => setCount(count+1)}>+</button>
+        <button onClick={() => setCount(counter+1)}>+</button>
         <button onClick={addUser}>add user</button>
-    <NewMessagesCounter count={count} />
+    <NewMessagesCounter count={counter} />
     <UsersContainer users={users} />
     </>
 }
