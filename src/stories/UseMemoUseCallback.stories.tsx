@@ -1,4 +1,5 @@
-import React, {useMemo, useState} from "react";
+import React, {useCallback, useMemo, useState} from "react";
+import {log} from "util";
 
 export default {
     title: 'useMemo'
@@ -13,7 +14,7 @@ export const DifficultCountingExample = () => {
     let resultB = 1;
 
 
-//useMemo, сделай вычисления из стрелочной функции и запомни их, пока значение из квадратных скобок не поменяется.
+//useMemo, сделай вычисления из стрелочной функции и запомни то, что функция ВОЗВРАЩАЕТ, пока значение из квадратных скобок не поменяется.
 // Возвращай это значение и, только если значение в скобках изменится, сделай пересчёт
     resultA = useMemo(() => {
         let tempResultA = 1;
@@ -71,5 +72,36 @@ export const HelpsToReactMemoExample = () => {
         <button onClick={addUser}>add user</button>
         {counter}
         <UsersContainer users={newArray}/>
+    </>
+}
+
+const Books = (props: { addBook: () => void }) => {
+    console.log("books here")
+    return <div>
+        <button onClick={props.addBook}>add book</button>
+
+    </div>
+}
+
+const BooksContainer = React.memo(Books);
+
+export const LikeUseCallback = () => {
+    console.log("likeUseCallback")
+    const [counter, setCount] = useState<number>(0)
+    const [books, setBooks] = useState<Array<string>>(["React", "Java", "JS"])
+
+
+    const addBook = useCallback(()=> {
+        console.log("я callback и я отрисовался, ыыы")
+        const newBooks = [...books, "Angular" + new Date().getTime()]
+        setBooks(newBooks)
+    }, [books])
+
+
+
+    return <>
+        <button onClick={() => setCount(counter + 1)}>+</button>
+        {counter}
+        <BooksContainer addBook={addBook}/>
     </>
 }
